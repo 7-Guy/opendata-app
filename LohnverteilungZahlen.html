@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="DE">
+    
+	<head>
+        <meta charset="utf-8"> 
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>        
+        
+<body>
+
+<span id="title"><h1 id="home">Lohnstruktur Vergleich der Geschlechter</h1></span>
+
+	   <div id="navbar">
+                    <ul>
+                            <li><a href="index.html">Startseite</a></li>
+                            <li><a href="ausbildung.html">Ausbildungen</a></li>
+                            <li><a href="grossregionen.html">Grossregionen</a>
+                            <li><a href="lohnverteilungProzent.html">Tätigkeit (%)</a>
+                            <li><a href="LohnverteilungZahlen.html">Tätigkeit (n)</a>
+                            <li><a href="erwerbsquote.html">Erwerbsquote</a>
+                            <li><a href="daten.html">Daten</a>       
+                            
+                    </ul>
+               </div>
+
+     </div>
+	
+<br>     
+<img src="img/startbild.png" alt="Symbolbild">	
+<br>     
+    
+<span id="title"><h2>Vergleich der verschiedenen Ausbildungen</h2></span>
+<p class="text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea</p>    
+	
+<p>Im Zusammenhang mit der Veranstaltung <a href="http://www.iwi.unibe.ch/content/studium/veranstaltungen/resource/open_data_datenmanagement_und_visualisierung/index_ger.html" target="_blank">"Open Data: Datenmanagement und Visualisierung"</a> am Institut für Wirtschaftsinformatik der Universität Bern haben ich, <a href="mailto:manuel.buehler@students.unibe.ch"> Manuel Bühler</a> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita ka.</p>
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, </p>
+	<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<p>
+    <p></p>
+    <br>
+
+<div id="chartContainer">
+  <script src="../d3/d3.v3.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", 590, 400);
+    d3.tsv("/data/taetigkeit.csv", function (data) {
+      data = dimple.filterData(data, "Region", ["Schweiz"])
+      var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(65, 30, 505, 305);
+      
+        var x = myChart.addCategoryAxis("x", "Jahr");
+      x.addOrderRule("Date");
+     myChart.addMeasureAxis("y", "Bruttolohn für Sekretariats- und Kanzleiarbeiten");
+        
+      var s = myChart.addSeries("Geschlecht", dimple.plot.area);
+      myChart.addLegend(60, 10, 500, 20, "right");
+      myChart.draw();
+    });
+  </script>
+</div>

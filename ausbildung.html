@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="DE">
+    
+	<head>
+        <meta charset="utf-8"> 
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>        
+        
+<body>
+
+<span id="title"><h1 id="home">Lohnstruktur Vergleich der Geschlechter</h1></span>
+
+	   <div id="navbar">
+                    <ul>
+                            <li><a href="index.html">Startseite</a></li>
+                            <li><a href="ausbildung.html">Ausbildungen</a></li>
+                            <li><a href="grossregionen.html">Grossregionen</a>
+                            <li><a href="lohnverteilungProzent.html">Tätigkeit (%)</a>
+                            <li><a href="LohnverteilungZahlen.html">Tätigkeit (n)</a>
+                            <li><a href="erwerbsquote.html">Erwerbsquote</a>
+                            <li><a href="daten.html">Daten</a>     
+                            
+                    </ul>
+               </div>
+
+     </div>
+	
+<br>     
+<img src="img/startbild.png" alt="Symbolbild">	
+<br>    
+    
+<span id="title"><h2>Vergleich nach Ausbildung und Geschlecht</h2></span>
+<p class="text">
+    Um einen grundsätzlichen Eindruck über die Lohnunterschiede zwischen Frauen und Männern zu bekommen, werden sie nach Ausbildung verglichen. Die Werte werden zu Beginn per default für die gesamte Schweiz angezeigt. Sie können aber auch für die einzelnen Grossregionen individuell betrachtet werden. Durch Klicken der Buttons passen sich die Balken den Lohndaten der entsprechenden Grossregion an. Wenn man die Maus auf einem Balken ruhen lässt, wird der entsprechende Bruttolohn in Zahlen angezeigt.</p>    
+
+<span id="title"><h2>Daten</h2></span> 
+    <h3>Bruttolohn</h3>
+<p>Der Lohn wird als monatlicher standardisierter Bruttolohn angegeben. Das BfS gibt den Bruttolohn standardisiert an. Das heisst, Teilzeitstellen werden auf ein Vollzeitäquivalent von 4.33 Wochen zu 40 Arbeitsstunden umgerechnet. Als Wert wird der Median gewählt. Folglich liegt für die Hälfte der Arbeitnehmenden der standardisierte Lohn über, für die andere Hälfte dagegen unter dem ausgewiesenen Median.</p>
+
+<h3>Grossregion</h3>
+    <p>Die Grossregionen setzen sich aus den folgenden Kantonen zusammen.</p>
+    <table>
+      <tr>
+        <th>Grossregion</th>
+        <th>Kantone</th>
+      </tr>
+      <tr>
+        <td>Espace</td>
+        <td>BE/FR/SO/NE/JU</td>
+      </tr>
+      <tr>
+        <td>Genferseeregion</td>
+        <td>VD/VS/GE</td>
+      </tr>
+              <tr>
+        <td>Nordwestschweiz</td>
+        <td>BS/BL/AG</td>
+      </tr>
+              <tr>
+        <td>Ostschweiz</td>
+        <td>GL/SH/AR/AI/SG/GR/TG</td>
+      </tr>
+              <tr>
+        <td>Tessin</td>
+        <td>TI</td>
+      </tr>
+              <tr>
+        <td>Zentralschweiz</td>
+        <td>LU/UR/SZ/OW/NW/ZG</td>
+      </tr>      
+        <tr>
+        <td>Zürich</td>
+        <td>ZH</td>
+      </tr>
+    </table>
+
+<span id="title"><h2>Schlussfolgerungen</h2></span>    
+    <p>Die Visualisierung zeigt auf, dass mit allen untersuchten Ausbildungen Frauen weniger verdienen als Männer. Dies ist in allen Grossregionen der Fall. Ein Röstigraben ist nicht festzustellen. Liegt somit Diskriminierung vor? Um diese Frage zu beantworten, müssen wir erneut unsere Liste der objektiven Faktoren, welche einen Lohnunterschied erklären können, betrachten. Von dieser Liste kann einzig der Punkt Ausbildung gestrichen werden.</p>
+    
+<ul class="a">
+  <li><span class="durchgestrichen">Ausbildung</span></li>
+  <li>Funktion</li>
+  <li>Position</li>
+  <li>Erfahrung</li>
+  <li>Dienstalter</li>
+  <li>mehr Frauen in Tieflohnbranchen</li>
+  <li>Karriere-Unterbruch zugunsten Familie</li>
+</ul>  
+
+	<p>Folglich können die in der Visualisierung aufgezeigten Lohnunterschiede bei gleicher Ausbildung unter Umständen objektiv begründet werden. Die vorliegende Abbildung liefert also keinen Beleg dafür, dass Frauen bei der Entlohnung diskriminiert werden. Trotzdem ist es verblüffend zu sehen, wie viel weniger Frauen grundsätzlich verdienen.<p>
+    
+    <p>Mit den Visualisierungen Tätigkeit (%) und Tätigkeit (n) können mehr objektive Faktoren ausgeschlossen werden.</p>
+    <br>
+
+<div id="anzeigemitte">  
+    
+   <div class="button1">
+    <input name="updateButton" 
+           type="button" 
+           value="Espace"
+           onclick="updateEspace()" />
+   </div> 
+    
+   <div class="button">
+    <input name="updateButton" 
+           type="button" 
+           value="Genfersee" 
+           onclick="updateGenfersee()" />
+    </div>
+       <div class="button">    
+    <input name="updateButton" 
+           type="button" 
+           value="Nordwestschweiz" 
+           onclick="updateNordwestschweiz()" />
+   </div> 
+
+   <div class="button">
+    <input name="updateButton" 
+           type="button" 
+           value="Ostschweiz" 
+           onclick="updateOstschweiz()" />
+   </div> 
+   <div class="button">
+    <input name="updateButton" 
+           type="button" 
+           value="Tessin" 
+           onclick="updateTessin()" />
+          </div> 
+   <div class="button">
+    <input name="updateButton" 
+           type="button" 
+           value="Zentralschweiz" 
+           onclick="updateZentralschweiz()" />
+          </div> 
+   <div class="button">
+    <input name="updateButton"
+           type="button"
+           value="Zürich"
+           onclick="updateZürich()" />
+          </div>
+   <div class="button8">
+    <input name="updateButton"
+           type="button"
+           value="Schweiz"
+           onclick="updateSchweiz()" />
+            </div>
+</div>           
+
+
+    
+<script src="http://d3js.org/d3.v3.min.js"></script>    
+<script> 
+//bis hier funktioniert noch alles wie es wohl funktionieren sollte   
+    
+var margin = {top: 40, right: 20, bottom: 200, left: 40},
+    width = 760 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x0 = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var x1 = d3.scale.ordinal();
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#ff8c00"]);
+
+var xAxis = d3.svg.axis()
+    .scale(x0)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var xAxisSVG;
+var yAxisSVG;
+var ausbildung;
+    
+d3.csv("data/2010schweiz.csv", function(error, data) {
+  var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Ausbildung"; });
+
+  data.forEach(function(d) {
+    d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+  });
+
+  x0.domain(data.map(function(d) { return d.Ausbildung; }));
+  x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+  y.domain([0, 12500]); 
+
+
+  xAxisSVG = svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  xAxisSVG.selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+
+  yAxisSVG = svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+  yAxisSVG
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Bruttolohn");
+
+  ausbildung = svg.selectAll(".ausbildung")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + x0(d.Ausbildung) + ",0)"; });
+
+  ausbildung.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+    .enter().append("rect")
+      .attr("width", x1.rangeBand())
+      .attr("x", function(d) { return x1(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .style("fill", function(d) { return color(d.name);})
+      .append("title")   
+      .text(function(d) {
+         return "Bruttolohn: CHF " + d.value;
+            });
+
+
+  var legend = svg.selectAll(".legend")
+      .data(geschlechtNames.slice().reverse())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+     });
+    
+  // ** Update data section (Called from the onclick)
+     // hier irgenwo liegt wohl der hund begraben. 
+    // -- am wichtigsten wäre, dass die neuen Daten abgerufen werden. bei der y-Achse funktioniert dies. bei den balken allerdings nicht./**/ 
+    
+
+    function updateEspace() {
+        // Get the data again
+        d3.csv("data/2010espace.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+
+        });
+    }
+
+    //der rest ist dann wieder copy/paste
+
+    function updateGenfersee() {
+        // Get the data again
+        d3.csv("data/2010genfersee.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+
+        });
+    }
+
+    function updateNordwestschweiz() {
+        // Get the data again
+        d3.csv("data/2010nordwestschweiz.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+        });
+    }
+
+    function updateOstschweiz() {
+        // Get the data again
+        d3.csv("data/2010ostschweiz.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+        });
+    }
+
+    function updateTessin() {
+        // Get the data again
+        d3.csv("data/2010tessin.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+
+        });
+    }
+
+    function updateZentralschweiz() {
+        // Get the data again
+        d3.csv("data/2010zentralschweiz.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+
+        });
+    }
+
+    function updateZürich() {
+        // Get the data again
+        d3.csv("data/2010zuerich.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+        });
+    }
+
+    function updateSchweiz() {
+        // Get the data again
+        d3.csv("data/2010schweiz.csv", function (error, data) {
+            var geschlechtNames = d3.keys(data[0]).filter(function (key) {
+                return key !== "Ausbildung";
+            });
+
+            data.forEach(function (d) {
+                d.geschlechter = geschlechtNames.map(function (name) {
+                    return {name: name, value: +d[name]};
+                });
+            });
+            // Scale the range of the data again
+            x0.domain(data.map(function (d) {
+                return d.Ausbildung;
+            }));
+            x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+            y.domain([0, 12500]); 
+
+
+            yAxisSVG.transition()
+                    .call(yAxis);
+
+            ausbildung.data(data);
+
+            ausbildung.selectAll("rect")
+                    .data(function (d) {
+                        return d.geschlechter;
+                    })
+                    .transition()
+                    .duration(2000)
+                    .ease("bounce")
+                    .attr("y", function (d) {
+                        return y(d.value);
+                    })
+                    .attr("height", function (d) {
+                        return height - y(d.value);
+                    });
+
+        });
+    }
+</script>
+
+    
+</body>
+</html>

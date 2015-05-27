@@ -1,0 +1,142 @@
+svg{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 800; 
+            }
+            
+            .axis path,
+            .axis line {
+              fill: none;
+              stroke: #000;
+              shape-rendering: crispEdges;
+            }
+
+            }
+
+            .x.axis path {
+              display: none;   
+            }
+            
+
+            body {
+                
+                width:800px;
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+            h1, h2, h3, p {font-family: verdana, non-serif;}     
+
+            h1 {font-size: 26px;}   
+
+            h2 {font-size:22px;}
+            
+            h3 {font-size:16px;}
+
+            p {font-size: 16px;}
+
+            a:link {color: black;}
+            a:visited {color: black;}
+            a:active {color: black}
+            a:hover {color: grey;}
+            a {text-decoration: none; 
+            text-underline: none;}
+
+            text {
+              font: 10px sans-serif;
+            }
+
+            ul.a {
+                font: 16px sans-serif;
+                list-style-Type: square;
+            }
+            
+            .durchgestrichen { text-decoration:line-through; }
+            .blinkend { 
+                  /* -- text decoration blink funktioniert nur im Firefox */
+                  text-decoration:blink;
+                  /* Für alle anderen Browser brauche wir diesen Code: */
+                  -webkit-animation-name: blinker;
+                    -webkit-animation-duration: 0.6s;
+                    -webkit-animation-iteration-count:infinite;
+                    -webkit-animation-timing-function:ease-in-out;
+                    -webkit-animation-direction: alternate;
+                }
+
+                @-webkit-keyframes blinker {
+                  from {opacity: 1.0;}
+                  to {opacity: 0.0;}
+                }
+
+            table {
+                caption-side: left;
+                font: 14px sans-serif;
+            }
+
+            th {
+                text-align: left;
+            }
+
+             #title {
+                                background-color: #A7D4D4;
+                                border-top: 2px solid #3C4C4C;
+
+                                float: left;
+                                width: 100%;
+
+                                               }/*ich glaube die Selektion funktioniert hier nicht wirklich-->.statt#*/
+
+            .anmerkungen {
+                                font-size: 12px;
+            }
+
+            /*.aufzählung {
+                                font-size: 16px;
+            } funktioniert irgendwie nicht. Die letzte Aufzählung ändert es mir irgendwie den Schriftzug?!*/
+
+             #navbar {
+                    background-color: #A7D4D4;
+                    border-top: 2px solid #3C4C4C;
+                    float: left;
+                    width: 800px;
+               }
+               #navbar ul {
+                    list-style: none;
+               }
+               #navbar li {
+                    float: left;
+                    width: auto;
+               }
+               #navbar a {
+                   font-size: 16px; 
+                   display: block;
+                    padding: 7px 7px;
+                    font: bold 0.8em/1.6em Verdana, "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial,
+                    sans-serif;
+                    background-color: #A7D4D4;
+                    color: #254C4C;
+                    border-left: 2px solid #3C4C4C;
+               }
+               #navbar a:hover, #navbar a:focus {
+                    background-color: #3C4C4C;
+                    color: #fff;
+               }
+            
+               #anzeigemitte { 
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto; 
+                }
+                
+                .button1, .button, .button8 {
+                     float: left;
+                     margin-left: 9.8234px;
+                    margin-right: 9.8234px;}
+                
+                .button2 {
+                     float: left;
+                    }
+                .chartContainer {
+                    text-align: center;
+                }

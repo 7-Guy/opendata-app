@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="DE">
+    
+	<head>
+        <meta charset="utf-8"> 
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>        
+        
+<body>
+
+<span id="title"><h1 id="home">Lohnstruktur Vergleich der Geschlechter</h1></span>
+
+	   <div id="navbar">
+                    <ul>
+                             <li><a href="index.html">Startseite</a></li>
+                            <li><a href="ausbildung.html">Ausbildungen</a></li>
+                            <li><a href="grossregionen.html">Grossregionen</a>
+                            <li><a href="lohnverteilungProzent.html">Tätigkeit (%)</a>
+                            <li><a href="LohnverteilungZahlen.html">Tätigkeit (n)</a>
+                            <li><a href="erwerbsquote.html">Erwerbsquote</a>
+                            <li><a href="daten.html">Daten</a>   
+                            
+                    </ul>
+               </div>
+
+     </div>
+	
+<br>     
+<img src="img/startbild.png" alt="Symbolbild">	
+<br>     
+    
+<span id="title"><h2>Vergleich der Grossregionen</h2></span>
+<p class="text">
+In dieser Visualisierung werden die Bruttolöhne erneut als Balken angezeigt. Hier werden sie aber nach Grossregionen sortiert. Somit können für jeden einzelen Ausbildungsabschluss die Lohnunterschiede mit Werten der anderen Grossregionen verglichen werden. Die Werte werden zu Beginn per default für "Abgeschlossene Berufsausbildung" angezeigt. Sie können für die einzelnen Ausbildungsabschlüsse individuell betrachtet werden. Durch Klicken der Buttons passen sich die Balken den entsprechenden Lohndaten an. Wenn man die Maus auf einem Balken ruhen lässt wird der entsprechende Bruttolohn in Zahlen angezeigt.</p>      
+	
+    
+<span id="title"><h2>Daten</h2></span> 
+    <h3>Bruttolohn</h3>
+<p>Der Lohn wird als monatlicher standardisierter Bruttolohn angegeben. Das BfS gibt den Bruttolohn standardisiert an. Das heisst, Teilzeitstellen werden auf ein Vollzeitäquivalent von 4.33 Wochen zu 40 Arbeitsstunden umgerechnet. Als Wert wird der Median gewählt. Folglich liegt für die Hälfte der Arbeitnehmenden der standardisierte Lohn über, für die andere Hälfte dagegen unter dem ausgewiesenen Median.</p>
+    
+<span id="title"><h2>Schlussfolgerungen</h2></span>     
+    
+    <p>Die Schlussfolgerungen decken sich mit denjenigen der Visualisierung zuvor</p>
+	
+    <p></p>
+    <br>
+
+<div id="anzeigemitte">  
+    
+    
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Abgeschlossene Berufsausbildung"
+           onclick="updateAbgeschlberuf()" />
+   </div> 
+
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Andere Ausbildungsabschlüsse"
+           onclick="updateAndere()" />
+   </div> 
+    
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Fachhochschule (FH/PH)" 
+           onclick="updateFachhochschule()" />
+    </div>
+       <div class="button2">    
+    <input name="updateButton" 
+           type="button" 
+           value="Höhere Berufsausbildung/Fachschule" 
+           onclick="updateHoefa()" />
+   </div> 
+
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Lehrer" 
+           onclick="updateLehrer()" />
+   </div> 
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Matura" 
+           onclick="updateMatura()" />
+          </div> 
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Ohne abgeschlossene Berufsausbildung" 
+           onclick="updateOhne()" />
+          </div> 
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Universitäre Hochschule (Uni/ETH)" 
+           onclick="updateUni()" 
+            </div> 
+   <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Unternehmensinterne Ausbildung" 
+           onclick="updateUnternehmensintern()" 
+            </div> 
+  <div class="button2">
+    <input name="updateButton" 
+           type="button" 
+           value="Ausbildung - Total" 
+           onclick="updateTotal()" />
+          </div>    
+       
+</div>           
+
+
+       
+<script src="http://d3js.org/d3.v3.min.js"></script>    
+<script> 
+    
+var margin = {top: 40, right: 20, bottom: 200, left: 40},
+    width = 760 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x0 = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var x1 = d3.scale.ordinal();
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#ff8c00"]);
+
+var xAxis = d3.svg.axis()
+    .scale(x0)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+    
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var xAxisSVG;
+var yAxisSVG;
+var grossregion;
+    
+d3.csv("data/2010abgeschlberuf.csv", function(error, data) {
+  var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+  data.forEach(function(d) {
+    d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+  });
+
+  x0.domain(data.map(function(d) { return d.Grossregion; }));
+  x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+  y.domain([0, 12500]); 
+  
+    xAxisSVG = svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  xAxisSVG.selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+
+  yAxisSVG = svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+  yAxisSVG
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Bruttolohn");
+
+  grossregion = svg.selectAll(".Grossregion")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + x0(d.Grossregion) + ",0)"; });
+
+  grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+    .enter().append("rect")
+      .attr("width", x1.rangeBand())
+      .attr("x", function(d) { return x1(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .style("fill", function(d) { return color(d.name);})
+      .append("title")   
+      .text(function(d) {
+         return "Bruttolohn: CHF " + d.value;
+            });
+
+
+  var legend = svg.selectAll(".legend")
+      .data(geschlechtNames.slice().reverse())
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+     });
+    
+  // ** Update data section (Called from the onclick)
+   
+function updateAndere() {
+    // Get the data again
+    d3.csv("/data/2010andere.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+        // Scale the range of the data again 
+          x0.domain(data.map(function(d) { return d.Grossregion; }));
+          x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}
+
+function updateAbgeschlberuf() {
+    // Get the data again
+    d3.csv("/data/2010abgeschlberuf.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+        // Scale the range of the data again 
+          x0.domain(data.map(function(d) { return d.Grossregion; }));
+          x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}
+  
+function updateFachhochschule() {
+    // Get the data again
+    d3.csv("/data/2010fachhochschule.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+        // Scale the range of the data again 
+          x0.domain(data.map(function(d) { return d.Grossregion; }));
+          x1.domain(geschlechtNames).rangeRoundBands([0, x0.rangeBand()]);
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}
+    
+function updateHoefa() {
+    // Get the data again
+    d3.csv("/data/2010hoefa.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}
+    
+function updateLehrer() {
+    // Get the data again
+    d3.csv("/data/2010Lehrer.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}
+    
+function updateMatura() {
+    // Get the data again
+    d3.csv("/data/2010Matura.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+} 
+
+function updateOhne() {
+    // Get the data again
+    d3.csv("/data/2010ohne.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}
+
+function updateTotal() {
+    // Get the data again
+    d3.csv("/data/2010total.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}   
+    
+function updateUni() {
+    // Get the data again
+    d3.csv("/data/2010uni.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+}  
+    
+function updateUnternehmensintern() {
+    // Get the data again
+    d3.csv("/data/2010unternehmensintern.csv", function(error, data) {
+        var geschlechtNames = d3.keys(data[0]).filter(function(key) { return key !== "Grossregion"; });
+
+        data.forEach(function(d) {
+            d.geschlechter = geschlechtNames.map(function(name) { return {name: name, value: +d[name]}; });
+            }); 
+          y.domain([0, 12500]); 
+
+        yAxisSVG.transition()
+            .call(yAxis);
+    
+    grossregion.data(data);
+        
+    grossregion.selectAll("rect")
+      .data(function(d) { return d.geschlechter; })
+        .transition()
+        .duration(2000)
+        .ease("bounce")
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      ;
+
+    });
+} 
+    
+</script>
+
+    
+</body>
+</html>
